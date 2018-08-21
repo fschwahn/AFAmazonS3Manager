@@ -95,6 +95,12 @@
                                    expiration:(NSDate *)expiration
                                         error:(NSError * __autoreleasing *)error;
 
+- (NSMutableURLRequest *)requestWithMethod:(NSString *)method
+                                 URLString:(NSString *)URLString
+                                parameters:(NSDictionary *)parameters
+                                   headers:(NSDictionary *)headers
+                                     error:(NSError *__autoreleasing *)error;
+
 @end
 
 ///----------------

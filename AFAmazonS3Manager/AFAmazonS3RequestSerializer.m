@@ -238,9 +238,16 @@ static NSString * AFAWSSignatureForRequest(NSURLRequest *request, NSString *buck
 - (NSMutableURLRequest *)requestWithMethod:(NSString *)method
                                  URLString:(NSString *)URLString
                                 parameters:(NSDictionary *)parameters
+                                   headers:(NSDictionary *)headers
                                      error:(NSError *__autoreleasing *)error
 {
     NSMutableURLRequest *request = [super requestWithMethod:method URLString:URLString parameters:parameters error:error];
+
+    if (headers != nil) {
+        for (id key in headers) {
+            [request setValue:[headers objectForKey:key] forHTTPHeaderField:key];
+        }
+    }
 
     if (self.sessionToken) {
         [request setValue:self.sessionToken forHTTPHeaderField:@"x-amz-security-token"];
